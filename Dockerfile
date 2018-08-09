@@ -20,10 +20,8 @@
 # OR PERFORMANCE OF THIS SOFTWARE.
 #}
 
-FROM resin/rpi-raspbian:stretch
+FROM ubuntu:latest
 MAINTAINER Philippe Coval (p.coval@samsung.com)
-
-RUN [ "cross-build-start" ]
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LC_ALL en_US.UTF-8
@@ -83,5 +81,3 @@ RUN echo "#log: ${project}: Installing sources" \
   && install *.tgz /usr/local/src/${project}/ \
   && cp -rfva ./build/stage/ /usr/local/src/${project}/ \
   && sync
-
-RUN [ "cross-build-end" ]

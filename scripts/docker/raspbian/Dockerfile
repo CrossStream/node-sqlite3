@@ -20,8 +20,10 @@
 # OR PERFORMANCE OF THIS SOFTWARE.
 #}
 
-FROM ubuntu:latest
+FROM resin/rpi-raspbian:stretch
 MAINTAINER Philippe Coval (p.coval@samsung.com)
+
+RUN [ "cross-build-start" ]
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LC_ALL en_US.UTF-8
@@ -66,7 +68,7 @@ RUN echo "#log: ${project}: Preparing sources" \
   && sync
 
 WORKDIR /usr/local/${project}/${project}
-RUN echo "#log: ${project}: Building sources" \
+RUN echo "#log: ${project}: Preparing sources" \
   && set -x \
   && which npm || . ~/.bashrc \
   && npm run pack \
@@ -74,3 +76,12 @@ RUN echo "#log: ${project}: Building sources" \
   && find build/stage/ -type f \
   && sync
 
+WORKDIR /usr/local/${project}/${project}
+RUN echo "#log: ${project}: Installing sources" \
+  && set -x \
+  && install -d /usr/local/src/${project}/ \
+  && install *.tgz /usr/local/src/${project}/ \
+  && cp -rfva ./build/stage/ /usr/local/src/${project}/ \
+  && sync
+
+RUN [ "cross-build-end" ]

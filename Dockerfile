@@ -48,7 +48,7 @@ RUN echo "#log: ${project}: Setup system" \
   python \
   && apt-get clean \
   && NVM_VERSION="v0.33.8" \
-  && NODE_VERSION="4" \
+  && NODE_VERSION="node" \
   && curl -o- https://raw.githubusercontent.com/creationix/nvm/${NVM_VERSION}/install.sh | bash \
   && which nvm || . ~/.bashrc \
   && nvm install ${NODE_VERSION} \

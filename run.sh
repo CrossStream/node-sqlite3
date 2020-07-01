@@ -125,7 +125,7 @@ build_()
     outdir="${PWD}/tmp/out"
     container="${project}"
     branch_name=$(echo "${branch}" | sed -e 's|/|.|g')
-    dir="/usr/local/src/${project}/"
+    dir="/usr/local/src/${project}/deploy/"
     image="${user}/${project}/${branch}"
     tag="$image:${version}"
     tag="${org}/${project}:${branch_name}"
